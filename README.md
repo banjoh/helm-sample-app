@@ -10,7 +10,7 @@ helm package . -d manifests/
 replicated release create --auto -y
 ```
 
-**If you already have a helm chart, you should be aware of [Importing an Existing Chart](#already-have-a-helm-chart) before you start setup.** 
+**If you already have a helm chart, you should be aware of [Importing an Existing Chart](#already-have-a-helm-chart) before you start setup.**
 
 ## Get started
 
@@ -27,10 +27,22 @@ Once you've created a repository from the template, you'll want to `git clone` y
 
 
 
-### 1. Install CLI
+### Install CLI
 
 To start, you'll want to install the `replicated` CLI.
 You can install with [homebrew](https://brew.sh) or grab the latest Linux or macOS version from [the replicatedhq/replicated releases page](https://github.com/replicatedhq/replicated/releases).
+
+### Helpful commands
+
+* Update library chart dependency
+```sh
+helm dependency update .
+```
+
+* Update library chart dependency
+```sh
+helm install mydemo . --debug --dry-run
+```
 
 #### Brew
 
