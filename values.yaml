@@ -25,6 +25,39 @@ apps:
           GHOST_DATABASE_PORT_NUMBER: 3306
           GHOST_DATABASE_USER: bn_ghost
           GHOST_DATABASE_NAME: bitnami_ghost
+  mysql:
+    enabled: true
+    type: deployment
+    replicas: 1
+    containers:
+      mysql:
+        image:
+          repository: docker.io/bitnami/mysql
+          tag: "8.0"
+        env:
+          # ALLOW_EMPTY_PASSWORD is recommended only for development.
+          ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: bn_ghost
+          MYSQL_DATABASE: bitnami_ghost
+        volumeMounts:
+          - mountPath: /bitnami/mysql
+            name: mysql-data
+    volumes:
+      - name: mysql-data
+        persistentVolumeClaim:
+          claimName: mysql-data
+
+persistence:
+  mysql-data:
+    enabled: true
+    type: persistentVolumeClaim
+    persistentVolumeClaim:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
 
 # ghost:
 #     image: docker.io/bitnami/ghost:5
